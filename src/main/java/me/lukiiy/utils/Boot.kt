@@ -19,7 +19,7 @@ class Boot : PluginBootstrap {
                 register(InventoryViewer.registerInv(), "View a player's inventory", listOf("openinv", "viewinv"))
                 register(InventoryViewer.registerEChest(), "View a player's ender chest", listOf("openechest", "viewechest"))
                 register(InventoryViewer.registerEquip(), "View a player's armor & offhand", listOf("viewequip"))
-                register(InventoryViewer.registerCraft(), "Open the crafting table")
+                register(InventoryViewer.registerCraft(), "Opens the crafting table")
                 register(Ping.register(), "Displays a player's ping")
                 register(SlimeChunk.register(), "Tells if a player is in a slime chunk")
                 register(Vanish.registerMain(), "Toggles invisibility state", listOf("v"))
