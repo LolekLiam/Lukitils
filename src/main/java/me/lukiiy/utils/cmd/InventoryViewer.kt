@@ -17,6 +17,7 @@ import org.bukkit.event.Listener
 object InventoryViewer : Listener {
     private val reqInvsee: (CommandSender) -> Boolean = { it.hasPermission("invsee".asPermission()) }
     private val reqEChest: (CommandSender) -> Boolean = { it.hasPermission("echest".asPermission()) }
+    private val reqCraft: (CommandSender) -> Boolean = { it.hasPermission("craft".asPermission()) }
 
     fun registerInv(): LiteralCommandNode<CommandSourceStack> {
         return Commands.literal("invsee")
@@ -50,6 +51,23 @@ object InventoryViewer : Listener {
                 Command.SINGLE_SUCCESS
             }
         .build()
+    }
+
+    fun registerCraft(): LiteralCommandNode<CommandSourceStack> {
+        return Commands.literal("craft")
+            .requires { reqCraft(it.sender) }
+            .executes {
+                val sender = it.source.sender as? Player ?: throw Defaults.NOT_FOUND
+
+                sender.openWorkbench(null, true)
+                sender.sendMessage(
+                    Defaults.neutral(
+                        Component.text("Opened crafting table.")
+                    )
+                )
+                Command.SINGLE_SUCCESS
+            }
+            .build()
     }
 
     fun registerEquip(): LiteralCommandNode<CommandSourceStack> {
